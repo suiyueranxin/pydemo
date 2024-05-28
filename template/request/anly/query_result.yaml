@@ -1,0 +1,140 @@
+{% extends 'base.yaml' %}
+{% set path = path | default('anly/api/Query/v1/QueryResult') %}
+{% set filter_id = filter_id | default('filter') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block method_and_payload %}
+{% if temp_name == '' %}
+method: POST
+payload:
+  modelId: {{ modelId | default('ar.case::SalesAnalysisQuery') }}
+  modelType: {{ modelType | default('CALCULATIONVIEW') }}
+  axes:
+  {{ parse_axes(axes) }}
+  filterRelationship: {{ filterRelationship | default('GROUP') }}
+  filters:
+  {{ parse_filters(filters) }}
+  zeroComplements:
+  -
+    target: RESULT_SET
+    {% if zeroComplements %}
+    startDate: {{ zeroComplements.startDate | tojson}}
+    endDate: {{ zeroComplements.endDate | tojson }}
+    {% else %}
+    rangeBasedOnData: true
+    {% endif %}
+
+  orderBy:
+    defaultOrder: true
+    {% if orderBy %}
+    id: {{ orderBy.id | tojson }}
+    measureId: {{ orderBy.measureId | tojson }}
+    flag: {{ orderBy.flag | tojson }}
+    {% endif %}
+
+  options:
+    {% if options %}
+    OPTION_CURRENT_DATETIME: {{ options }}
+    {% else %}
+    {}
+    {% endif %}
+
+  paging:
+    {% if paging %}
+        pageSize: {{ paging }}
+    {% else %}
+    {{ paging | default(null) }}
+    {% endif %}
+
+  bottom: {{ bottom | default(null) }}
+  restrictedMeasures: {{ restrictedMeasures | default(null) }}
+
+
+{% elif temp_name == 'csv' %}
+payload:
+  filters: "PostingDate,(BT,20160101,20180731),(EQUAL,20150101);DocumentType,(EQUAL,Invoice),(EQUAL,Delivery)"
+  axes: "NetSalesAmountLC,SUM;PostingYear"
+  zeroComplements: "year,5,1"
+  orderBy: "PostingYear,DESC | NetSalesAmountLC,DESC"
+  options: "2016-01-01"
+  paging: 20
+
+
+{% elif temp_name == 'simple' %}
+method: POST
+payload: {{ payload | tojson }}
+
+
+{% elif temp_name == 'complex' %}
+{# todo #}
+
+
+{% else %}
+{# todo #}
+
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ macro ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% macro parse_axes(axes) -%}
+  -
+  {% for axis in axes %}
+    -
+      id: {{ axis.id | tojson }}
+      type: {{ axis.type | tojson }}
+      {% if axis.aggregation %}
+      aggregation: {{ axis.aggregation | tojson }}
+      {% endif %}
+  {% endfor %}
+{%- endmacro %}
+
+{% macro parse_filters(filters) -%}
+{% if filters|length > 0 %}
+  -
+    base: true
+    id: {{ filter_id | random() }}
+    formula: CONDITION
+    conditionOperator: ANDS
+    conditions:
+  {% for filter in filters %}
+    -
+    {% if filter|length > 1 %}
+      id: {{ filter_id | random() }}
+      formula: CONDITION
+      conditionOperator: OR
+      conditions:
+      -
+      {% for condition in filter %}
+        id: {{ filter_id | random() }}
+        analysisObjectId: {{ condition.analysisObjectId | tojson }}
+        formula: COMPARISON
+        members: {{ condition.members | tojson }}
+        parameters:
+        {% if condition.operator != '' %}
+          operator: {{ condition.operator | tojson }}
+        {% else %}
+          operator: EQUAL
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      id: {{ filter_id | random() }}
+      analysisObjectId: {{ filter[0].analysisObjectId | tojson }}
+      formula: COMPARISON
+      members: {{ filter[0].members | tojson }}
+      parameters:
+      {% if filter[0].operator != '' %}
+        operator: {{ filter[0].operator | tojson }}
+      {% else %}
+        operator: EQUAL
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  []
+{% endif %}
+{%- endmacro %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ macro ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

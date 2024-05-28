@@ -1,0 +1,13 @@
+{% if time[0] == 'year' %}
+year: "%DATE:FIRST_DAY_OF_RECENT_N_YEAR;{{ time[1] }}%"
+{% elif time[0] == 'quarter' %}
+quarter: "%DATE:FIRST_DAY_OF_RECENT_N_QUARTER;{{ time[1] }}%"
+{% elif time[0] == 'month' %}
+month: "%DATE:FIRST_DAY_OF_RECENT_N_MONTH;{{ time[1] }}%"
+{% elif time[0] == 'week' %}
+week: "%DATE:FIRST_DAY_OF_RECENT_N_WEEK;{{ time[1] }}%"
+{% elif time[0] == 'fiscal_period' %}
+fiscal_period: "%FISCAL:FIRST_DAY_OF_RECENT_N_FISCAL_PERIOD;{{ time[1] }}%"
+{% elif time[0] == 'fiscal_year' %}
+fiscal_year: "%FISCAL:FIRST_DAY_OF_RECENT_N_FISCAL_YEAR;{{ time[1] }}%"
+{% endif %}

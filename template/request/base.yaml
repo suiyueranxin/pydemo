@@ -1,0 +1,20 @@
+{% set temp_name = temp_name|default('') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ path ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+path: {{ path | parse_path() }}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ path ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+headers:
+  Content-Type: application/json
+
+{% block method_and_payload %}
+method: {{ method|default('GET') }}
+payload:
+  {% block payload %}
+  {% endblock %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+

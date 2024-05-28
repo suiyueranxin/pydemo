@@ -1,0 +1,2 @@
+case_id,case_name,case_description,skip,modelType,modelId,expected
+1,metadata,sales analysis query,N,CALCULATIONVIEW,ar.case::SalesAnalysisQuery,

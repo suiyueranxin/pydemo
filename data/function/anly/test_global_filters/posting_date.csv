@@ -1,0 +1,9 @@
+case_id,case_name,case_description,skip,time,posting_date,expected
+1,Current Date < System Date for period year,Data should based on current date for period year,N,year,12/31/2015,"time_range,years,2012,2015"
+2,Current Date > System Date for period year,Data should based on posting date for period year even if posting date later than system date ,N,year,1/1/2020,"time_range,years,2017,2020"
+3,Current Date < System Date for accounting period,Data should based on current date for accounting period month,N,fiscal_period,3/12/2017,"time_range,months,2016-12,2017-03"
+4,Current Date > System Date for accounting period,Data should be based on posting date for acounting period month even if posting date later than system date,N,fiscal_period,1/1/2020,"time_range,months,2019-10,2020-01"
+5,Current Date < System Date for period year quarter,Data based on current date,Y,quarter,9/30/2017,"time_range,quarters,2016Q4,2017Q3"
+6,Current Date < System Date for period year month,Data based on current date,N,month,9/30/2017,"time_range,months,2017-06,2017-09"
+7,Current Date < System Date for period year week,Data based on current date,N,week,11/30/2017,"time_range,weeks,201745,201748"
+8,Current Date < System Date for period fiscal year,Data based on current date,N,fiscal_year,9/30/2017,"time_range,years,2014,2017"

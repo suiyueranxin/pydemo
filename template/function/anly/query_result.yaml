@@ -1,0 +1,23 @@
+{% set temp_name = temp_name|default('') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ function  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% if temp_name == 'time,posting_date' %}
+axes:
+  m:1
+  d:2
+  time: {{ time }}
+filters:
+  time: {{ time }}
+options: {{ posting_date }}
+
+
+{% elif temp_name == 'create,n' %}
+
+
+
+{% else %}
+{% endif %}
+
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ function  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

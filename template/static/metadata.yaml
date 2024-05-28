@@ -1,0 +1,18 @@
+Measure:
+  NetSalesAmountLC: "[Measures].[NetSalesAmountLC]"
+  GrossProfitLC: "[Measures].[GrossProfitLC]"
+  QuantityInInventoryUoM: "[Measures].[QuantityInInventoryUoM]"
+
+Dimension:
+  DocumentTypeGroup: "[DocumentType].[DocumentTypeGroup].[DocumentTypeGroup]"
+  BusinessPartnerGroupName:
+
+TimeDimension:
+  PostingYear: ["[PostingDate].[PostingYear].[PostingYear]",year]
+  FinancialPeriodCode: ["[FinancialPeriod].[FinancialPeriodCode].[FinancialPeriodCode]",fiscal_year]
+  PostingYearAndQuarter: ["[PostingDate].[PostingYearAndQuarter].[PostingYearAndQuarter]",quarter]
+  PostingYearAndMonth: ["[PostingDate].[PostingYearAndMonth].[PostingYearAndMonth]",month]
+  PostingYearAndWeek: ["[PostingDate].[PostingYearAndWeek].[PostingYearAndWeek]",week]
+  FiscalYear: ["[FinancialPeriod].[FiscalYear].[FiscalYear]",fiscal_year]
+  PostingDate: ["[PostingDate].[PostingDate].[PostingDate]",date]
+

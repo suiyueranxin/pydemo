@@ -1,0 +1,12 @@
+{% set temp_name = temp_name|default('') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ status_code ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+status_code: {{ status_code | default(200) }}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ status_code ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ check point by cp_func ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block cp_func %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ check point by cp_func ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

@@ -1,0 +1,27 @@
+{% extends 'base.yaml' %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block content %}
+{% if temp_name == '' %}
+  modelType: {{ modelType | default('CALCULATIONVIEW') }}
+  modelId: {{ modelId | default('ar.case::SalesAnalysisQuery') }}
+  analysisObjects: {{ analysisObjects }}
+  hierarchyObjects: []
+  variableObjects: []
+
+{% elif temp_name == 'simple' %}
+{# todo #}
+
+
+{% elif temp_name == 'static' %}
+
+{# todo #}
+
+
+{% else %}
+{# todo #}
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

@@ -1,0 +1,27 @@
+{% extends 'base.yaml' %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ check point by func  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block cp_func %}
+{% if temp_name == '' %}
+has_fields: {{ has_fields }}
+has_data: {{ has_data }}
+count_fields: {{ count_fields }}
+count_data: {{ count_data }}
+time_info: {{ time_info }}
+
+
+{% elif temp_name == 'simple' %}
+{# todo #}
+
+
+{% elif temp_name == 'complex' %}
+{# todo #}
+
+
+{% else %}
+{# todo #}
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ check point by func  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

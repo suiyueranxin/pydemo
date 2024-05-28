@@ -1,0 +1,9 @@
+[
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data0]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data1]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data2]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data3]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data4]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data5]",
+  "case/anly/test_query_result.py::TestQueryResult::()::test_kpi_line_chart_card[case_data6]"
+]

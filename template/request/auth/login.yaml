@@ -1,0 +1,29 @@
+{% extends 'base.yaml' %}
+{% set path = path | default('auth/login.svc') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block method_and_payload %}
+{% if temp_name == '' %}
+method: POST
+payload:
+  username: {{ username | default('manager') }}
+  password: {{ password | default('manager') }}
+  schema: {{ schema | default('schema') | config() }}
+
+
+{% elif temp_name == 'simple' %}
+{}# todo #}
+
+
+{% elif temp_name == 'complex' %}
+{# todo #}
+
+
+{% else %}
+{# todo #}
+
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

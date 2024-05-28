@@ -1,0 +1,70 @@
+{% extends 'base.yaml' %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block content %}
+{% if temp_name == '' %}
+  metadata:
+    fields: {{ metadata.fields }}
+  data: {{ data }}
+  context:
+    -'_context_row_number'
+
+
+{% elif temp_name == 'simple' %}
+{# todo #}
+
+
+{% elif temp_name == 'complex' %}
+  metadata:
+    fields: {{ parse_fields(metadata.fields) }}
+  data: {{ parse_data(data) }}
+  context:
+    -'_context_row_number'
+
+{% else %}
+{# todo #}
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ macro ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% macro parse_fields(fields) -%}
+    {% for field in metadata.fields %}
+    -
+      id: {{ field.id | tojson }}
+      name: {{ field.name | tojson }}
+      semanticType: {{ field.semanticType | tojson }}
+      dataType: {{ field.dataType | tojson }}
+      sqlDataTypeName: {{ field.sqlDataTypeName | tojson }}
+      {% if field.analysisObjectDataType %}
+      analysisObjectDataType: {{ field.analysisObjectDataType | tojson }}
+      {% endif %}
+      {% if field.descriptionSqlDataTypeName %}
+      descriptionSqlDataTypeName: {{ field.descriptionSqlDataTypeName | tojson }}
+      {% endif %}
+      {% if field.aggregation %}
+      aggregation: {{ field.aggregation | tojson }}
+      {% endif %}
+    {% endfor %}
+{%- endmacro %}
+
+
+% macro parse_data(data) -%}
+{% for node in data %}
+  -
+  {% for d_n in node %}
+    -
+      {% if d_n.c %}
+      c: {{ d_n.c | tojson }}
+      d: {{ d_n.d | tojson }}
+      v: {{ d_n.v | tojson }}
+      {% else %}
+      {{ d_n | tojson }}
+      {% endif %}
+  {% endfor %}
+{% endfor %}
+{%- endmacro %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ macro ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}

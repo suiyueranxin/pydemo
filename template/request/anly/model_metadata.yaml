@@ -1,0 +1,27 @@
+{% extends 'base.yaml' %}
+{% set path = path | default('anly/api/ModelMetadata/v1') %}
+
+
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
+{% block method_and_payload %}
+{% if temp_name == '' %}
+method: POST
+payload:
+  modelType: {{ modelType | default('CALCULATIONVIEW') }}
+  modelId: {{ modelId | default('ar.case::SalesAnalysisQuery') }}
+
+
+{% elif temp_name == 'simple' %}
+{# todo #}
+
+
+{% elif temp_name == 'complex' %}
+{# todo #}
+
+
+{% else %}
+{# todo #}
+
+{% endif %}
+{% endblock %}
+{# ~~~~~~~~~~~~~~~~~~~~~~~~~~~ content ~~~~~~~~~~~~~~~~~~~~~~~~~~~ #}
